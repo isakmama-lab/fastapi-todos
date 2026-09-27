@@ -1,0 +1,18 @@
+body { background: #f4f7fb; color: #17233b; }
+.app-shell { max-width: 760px; }
+.hero-image {
+    height: 170px;
+    background: url("../images/todo_img.jpg") center / cover no-repeat;
+}
+.task-text { min-width: 0; overflow-wrap: anywhere; white-space: normal; }
+
+.list-group { padding-left: 0; }
+.list-group-item { padding-left: 20px; }
+.list-group-item > .task-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    text-align: left !important;
+}
+.list-group-item > .d-flex { margin-left: auto; }

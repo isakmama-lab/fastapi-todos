@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card border-0 shadow-sm mb-4">
+    <div class="card-body p-4">
+        <h2 class="h5 fw-bold mb-3">할 일 추가</h2>
+        <form action="/add" method="post">
+            <label for="task" class="form-label">새로운 할 일</label>
+            <textarea class="form-control" name="task" id="task" rows="3" placeholder="할 일을 입력하세요" required></textarea>
+            <div class="d-flex justify-content-end mt-3">
+                <button type="submit" class="btn btn-primary px-4">추가하기</button>
+            </div>
+        </form>
+    </div>
+</section>
+<section aria-labelledby="tasks-heading">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <h2 id="tasks-heading" class="h5 fw-bold mb-0">할 일 목록</h2>
+        <span class="badge text-bg-primary rounded-pill">{{ todos|length }}개</span>
+    </div>
+    {% if todos %}
+    <ul class="list-group shadow-sm rounded-3 overflow-hidden">
+        {% for todo in todos %}
+        <li class="list-group-item d-flex flex-column flex-sm-row align-items-sm-center gap-3 py-3">
+            <div class="flex-grow-1 task-text{% if todo.completed %} text-decoration-line-through text-secondary{% endif %}">
+                <span class="badge {% if todo.completed %}text-bg-success{% else %}text-bg-light border text-secondary{% endif %} me-2">{% if todo.completed %}완료{% else %}진행 중{% endif %}</span>{{ todo.task }}
+            </div>
+            <div class="d-flex gap-2 flex-shrink-0">
+                <a href="/edit/{{ todo.id }}" class="btn btn-outline-primary btn-sm">수정</a>
+                <form action="/delete/{{ todo.id }}" method="post" class="m-0">
+                    <button type="submit" class="btn btn-outline-danger btn-sm">삭제</button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <div class="card border-0 shadow-sm text-center"><div class="card-body py-5 text-secondary">등록된 할 일이 없습니다. 첫 번째 할 일을 추가해 보세요.</div></div>
+    {% endif %}
+</section>
+{% endblock content %}
